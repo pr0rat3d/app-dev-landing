@@ -1,24 +1,50 @@
 import React, { useState } from 'react';
+import Head from 'next/head';
 import { Menu, X, ExternalLink, Zap, Code, Layers, Rocket } from 'lucide-react';
+
+const UPWORK_URL = 'https://www.upwork.com/freelancers/~013eb65ac88de3feb6';
+// Replace with your real Formspree endpoint (formspree.io/f/xxxxxxx) after signup.
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
 
 export default function AppDevLanding() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', project: '' });
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState('idle');
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
+    setStatus('sending');
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      if (!res.ok) throw new Error('Form submission failed');
+      setStatus('sent');
+      setFormData({ name: '', email: '', project: '' });
+      setTimeout(() => setStatus('idle'), 4000);
+    } catch (err) {
+      setStatus('error');
+    }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-900 to-slate-900 text-white overflow-hidden">
+      <Head>
+        <title>pr0rat3d — Full-Stack MVP Development</title>
+        <meta name="description" content="Production-ready apps for startups. React, Supabase, Vercel. Fixed scope, fixed price, 2-week MVP builds." />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta property="og:title" content="pr0rat3d — Full-Stack MVP Development" />
+        <meta property="og:description" content="Production-ready apps for startups. React, Supabase, Vercel. Fixed scope, fixed price, 2-week MVP builds." />
+        <meta property="og:type" content="website" />
+        <link rel="icon" href="/favicon.svg" />
+      </Head>
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
@@ -53,7 +79,7 @@ export default function AppDevLanding() {
             <a href="#contact" className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition transform hover:scale-105">
               Start Your Project
             </a>
-            <a href="https://www.upwork.com/freelancers/~YOUR_UPWORK_ID" target="_blank" rel="noopener noreferrer" className="border-2 border-blue-400 text-blue-300 px-8 py-4 rounded-lg font-semibold hover:bg-blue-500/10 transition flex items-center justify-center gap-2 group">
+            <a href={UPWORK_URL} target="_blank" rel="noopener noreferrer" className="border-2 border-blue-400 text-blue-300 px-8 py-4 rounded-lg font-semibold hover:bg-blue-500/10 transition flex items-center justify-center gap-2 group">
               View on Upwork <ExternalLink size={18} className="group-hover:translate-x-1 transition" />
             </a>
           </div>
@@ -124,9 +150,12 @@ export default function AppDevLanding() {
               <label className="block text-sm font-semibold mb-2 text-blue-300">Tell me about your project</label>
               <textarea name="project" value={formData.project} onChange={handleInputChange} rows="5" className="w-full px-4 py-3 bg-slate-900/50 border border-blue-400/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-400 transition" required />
             </div>
-            <button type="submit" className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition transform hover:scale-105">
-              {submitted ? '✓ Message received!' : 'Send'}
+            <button type="submit" disabled={status === 'sending'} className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition transform hover:scale-105 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100">
+              {status === 'sending' ? 'Sending…' : status === 'sent' ? '✓ Message sent!' : 'Send'}
             </button>
+            {status === 'error' && (
+              <p className="text-sm text-red-400 mt-4 text-center">Something went wrong — please email me directly instead.</p>
+            )}
             <p className="text-sm text-gray-400 mt-4 text-center">Or email: <a href="mailto:canaan.farris@gmail.com" className="text-blue-300 hover:text-blue-200 font-semibold transition">canaan.farris@gmail.com</a></p>
           </form>
         </div>
@@ -141,7 +170,7 @@ export default function AppDevLanding() {
           <div>
             <h4 className="font-semibold mb-4 text-blue-300">Links</h4>
             <ul className="space-y-2 text-gray-400">
-              <li><a href="https://www.upwork.com/freelancers/~YOUR_UPWORK_ID" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition">Upwork</a></li>
+              <li><a href={UPWORK_URL} target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition">Upwork</a></li>
               <li><a href="https://github.com/pr0rat3d" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition">GitHub</a></li>
               <li><a href="https://prorated.app" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition">ProRated</a></li>
             </ul>
