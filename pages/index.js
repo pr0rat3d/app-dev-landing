@@ -91,7 +91,7 @@ export default function AppDevLanding() {
             <Card title="ProRated" tag="iOS & Android" icon={<Zap className="w-6 h-6" />} color="from-blue-500 to-cyan-500" description="Verified job site intelligence for trade professionals. Real-time bid tracking, trust scoring, team collaboration." stack="React PWA, Supabase, RevenueCat IAP, Stripe" link="https://prorated.app" />
             <Card title="FlipTrader" tag="Trading PWA" icon={<Rocket className="w-6 h-6" />} color="from-green-500 to-emerald-500" description="Day/swing trading alerts and automated execution bot. Real-time signals, portfolio tracking, multi-strategy execution." stack="React PWA, Supabase, Alpaca API" link="https://flip-trader.vercel.app" />
             <Card title="StockYard" tag="Livestock Marketplace" icon={<Layers className="w-6 h-6" />} color="from-amber-500 to-orange-500" description="Cattle market intelligence and proxy bidding. Live pricing, auction tracking, marketplace for dealers." stack="React, Supabase, USDA AMS data, Stripe" />
-            <Card title="Stateside Deliveries" tag="Island Logistics" icon={<Code className="w-6 h-6" />} color="from-purple-500 to-pink-500" description="Flexible last-mile delivery for US Virgin Islands. Reduces friction with flexible drop-off points and tracking." stack="React, Supabase, real-time tracking" link="https://frontend-pi-seven-81.vercel.app" />
+            <Card title="Stateside Deliveries" tag="Island Logistics" icon={<Code className="w-6 h-6" />} color="from-purple-500 to-pink-500" description="Flexible last-mile delivery for US Virgin Islands. Reduces friction with flexible drop-off points and tracking." stack="React, Supabase, real-time tracking" link="https://frontend-pi-seven-81.vercel.app" demoLink="https://claude.ai/code/artifact/0f52058a-7826-4365-887b-77cb5a9a6b98" />
           </div>
         </div>
       </section>
@@ -185,7 +185,7 @@ export default function AppDevLanding() {
   );
 }
 
-function Card({ title, tag, icon, color, description, stack, link }) {
+function Card({ title, tag, icon, color, description, stack, link, demoLink }) {
   return (
     <div className="group bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl border border-blue-500/30 p-8 hover:border-blue-400/60 transition hover:shadow-lg hover:shadow-blue-500/20 hover:-translate-y-2">
       <div className="flex items-center gap-4 mb-4">
@@ -199,7 +199,10 @@ function Card({ title, tag, icon, color, description, stack, link }) {
       </div>
       <p className="text-gray-300 mb-4">{description}</p>
       <p className="text-sm text-gray-400 mb-4"><strong className="text-gray-300">Stack:</strong> {stack}</p>
-      {link && <a href={link} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm font-semibold inline-flex items-center gap-1 group-hover:gap-2 transition">Visit →</a>}
+      <div className="flex gap-6">
+        {link && <a href={link} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm font-semibold inline-flex items-center gap-1 group-hover:gap-2 transition">Live App →</a>}
+        {demoLink && <a href={demoLink} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm font-semibold inline-flex items-center gap-1 group-hover:gap-2 transition">View Demo →</a>}
+      </div>
     </div>
   );
 }
