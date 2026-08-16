@@ -51,8 +51,7 @@ export default function AppDevLanding() {
       </div>
 
       <nav className="fixed w-full bg-slate-950/80 backdrop-blur-md z-50 border-b border-blue-500/20">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">pr0rat3d</div>
+        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-end items-center">
           <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden text-blue-400">
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
