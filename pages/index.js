@@ -36,10 +36,10 @@ export default function AppDevLanding() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-900 to-slate-900 text-white overflow-hidden">
       <Head>
-        <title>pr0rat3d — Full-Stack MVP Development</title>
+        <title>PWAs & Mobile Apps, Built Your Way</title>
         <meta name="description" content="Production-ready apps for startups. React, Supabase, Vercel. Fixed scope, fixed price, 2-week MVP builds." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta property="og:title" content="pr0rat3d — Full-Stack MVP Development" />
+        <meta property="og:title" content="PWAs & Mobile Apps, Built Your Way" />
         <meta property="og:description" content="Production-ready apps for startups. React, Supabase, Vercel. Fixed scope, fixed price, 2-week MVP builds." />
         <meta property="og:type" content="website" />
         <link rel="icon" href="/favicon.svg" />
