@@ -3,8 +3,7 @@ import Head from 'next/head';
 import { Menu, X, ExternalLink, Zap, Code, Layers, Rocket } from 'lucide-react';
 
 const UPWORK_URL = 'https://www.upwork.com/freelancers/~013eb65ac88de3feb6';
-// Replace with your real Formspree endpoint (formspree.io/f/xxxxxxx) after signup.
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xyegdqzn';
 
 export default function AppDevLanding() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
