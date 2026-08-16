@@ -163,7 +163,6 @@ export default function AppDevLanding() {
       <footer className="bg-slate-950 border-t border-blue-500/20 py-12 px-6">
         <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 mb-8">
           <div>
-            <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent mb-4">pr0rat3d</div>
             <p className="text-gray-400">Building production apps, fast.</p>
           </div>
           <div>
@@ -180,7 +179,7 @@ export default function AppDevLanding() {
           </div>
         </div>
         <div className="border-t border-blue-500/20 pt-8 text-center text-gray-500">
-          <p>&copy; 2026 pr0rat3d. Built with React + Vercel.</p>
+          <p>&copy; 2026 Built with React + Vercel.</p>
         </div>
       </footer>
     </div>
